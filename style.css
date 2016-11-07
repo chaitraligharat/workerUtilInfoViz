@@ -1,0 +1,16 @@
+
+body {
+  font: 10px sans-serif;
+}
+
+circle, .face {
+  fill: blue;
+}
+
+.eye {
+  fill:aqua;
+}
+
+.graph {
+
+}

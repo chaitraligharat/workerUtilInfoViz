@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Header -->
+  <section>
+    <h1>Worker Utility Function</h1>
+    <p>Akerlof and Kranton</p>
+  </section>
+
+  <!-- Utility -->
+  <section>
+    <h2>What is Utility?</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <p></p>
+      </div>
+      <div class="col-md-6">
+        <div id="basic-utility">
+        <!--  Draw Happy Chernoff face here -->
+        </div>
+        <div>
+          <input type="range" id="section1Control" value="100" onchange="changeSmile('basic-utility',this.value)">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Effort v/s salary -->
+  <section>
+    <h2>Utility - Effort - Salary</h2>
+    <div class="row">
+      <div class="col-md-6">
+
+        <p></p>
+      </div>
+      <div class="col-md-6">
+        <div id="step2">
+        </div>
+        <!-- TODO: Draw Graph Effort v/s salary here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Identity -->
+  <section>
+    <h2>Utility - Identity</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <p></p>
+      </div>
+      <div class="col-md-6">
+        <div id="step3">
+        </div>
+
+        <div>
+          <span>Insider</span><input type="range" id="section2Control" value="50" onchange="changeIdentity('step3',this.value)"><span>Outsider</span>
+        </div>
+        <!-- TODO: Draw Graph Effort v/s salary with Identity here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Deviation from group ideal -->
+  <section>
+    <h2>Utility - Deviation from Ideal</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <p></p>
+      </div>
+      <div class="col-md-6">
+        <div id="step4">
+        </div>
+
+        <div>
+          <span>Insider</span><input type="range" id="section4Idenity" value="50" onchange="changeIdentity('step4',this.value)"><span>Outsider</span>
+        </div>
+        <div>
+          <span>Less effort</span><input type="range" id="section4Ideal" value="50" onchange="changeIdeal('step4',this.value)"><span>More Effort</span>
+        </div>
+        <!-- TODO: Draw Graph Effort v/s salary with Ideal here -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Playground -->
+  <section>
+    <h2>Playground</h2>
+    <div class="row">
+      <div class="col-md-6">
+        <div id="step5">
+        </div>
+
+        <div>
+          <span>Insider</span><input type="range" id="section5Idenity" value="50" onchange="changeIdentity('step5',this.value)"><span>Outsider</span>
+        </div>
+        <div>
+          <span>Less effort</span><input type="range" id="section5Ideal" value="50" onchange="changeIdeal('step5',this.value)"><span>More Effort</span>
+        </div>
+        <!-- TODO: Draw try it -->
+      </div>
+      <div class="col-md-6">
+        <div id="record">
+        </div>
+        <!-- TODO: Draw trials -->
+      </div>
+    </div>
+  </section>
+  <footer>
+    <h2>Credits</h2>
+
+  </footer>
+
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<!-- <script type="text/javascript" src="http://www.larsko.org/v/hpi/chernoff.js"></script> -->
+<script type="text/javascript" src="chernoff.js"></script>
+<script type="text/javascript" src="graph.js"></script>
+<script type="text/javascript" src="myProj.js"></script>
+<script>
+  // mapSliderToChernoff('basic-utility',document.getElementById('section1Control'));
+
+  //Step 1
+  createFace("basic-utility", 200, 200);
+
+  //Step 2
+  var step2Graph = drawGraph("step2", 200, 200);
+  var step2Chernoff = createFace("step2", 200, 200);
+  step2Graph = drawIdentity(step2Graph, Math.PI/4);
+  connectGraph2Chernoff(step2Graph, step2Chernoff);
+
+  //Step 3
+  var step3Graph = drawGraph("step3", 200, 200);
+  var step3Chernoff = createFace("step3", 200, 200);
+  step3Graph = drawIdentity(step3Graph, Math.PI/4);
+  connectGraph2Chernoff(step3Graph, step3Chernoff);
+
+  //Step 4
+  var step4Graph = drawGraph("step4", 200, 200);
+  var step4Chernoff = createFace("step4", 200, 200);
+  step4Graph = drawIdentity(step4Graph, Math.PI/4);
+  step4Graph = drawIdeal(step4Graph, 50);
+  connectGraph2Chernoff(step4Graph, step3Chernoff);
+
+  //Step 5
+  var step5Graph = drawGraph("step5", 200, 200);
+  var step5Chernoff = createFace("step5", 200, 200);
+  step5Graph = drawIdentity(step5Graph, Math.PI/4);
+  step5Graph = drawIdeal(step5Graph, 50);
+  connectGraph2Chernoff(step5Graph, step5Chernoff);
+
+  //Record
+  var recordGraph = drawGraph("record", 200, 200);
+  connectGraph2Record(step5Graph, recordGraph)
+</script>
+</body>
+</html>
