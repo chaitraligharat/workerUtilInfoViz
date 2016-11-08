@@ -2,35 +2,51 @@
 <html>
 <head>
 <meta charset="utf-8">
+<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <!-- Header -->
-  <section>
+  <section class="container">
     <h1>Worker Utility Function</h1>
     <p>Akerlof and Kranton</p>
+    <h2>Formal Definition</h2>
+    <p>The utility function given by Akerlof and Kranton represents the effect effort put in by the worker, his or her income, their identity and their deviation from the group ideal.</p>
+    <p>This function if given by
+    <p>U(y, e;c) =ln(y) -  e + Ic - tc|e*(c) - e|</p>
+    <p>where, U is the worker's utility,<p>
+      <p> y is her income</p>
+      <p> Ic is the identity utility from being in category c</p>
+      <p> tc is the disutility resulting from deviating from the ideal effort level for category c or e*(c)</p>
+   <p>(Akerlof et al., 2005)</p>
+   <h2>Sounds Complex... But wait!</h2>
+    <p>We will go step by step and try to learn the concept behind the utility equation in simple terms.</p>
   </section>
 
   <!-- Utility -->
-  <section>
-    <h2>What is Utility?</h2>
+  <section class="container">
+    <h2>Step 1: Utility and Bob</h2>
     <div class="row">
       <div class="col-md-6">
-        <p></p>
+        <h3>Utility</h3>
+        <p>According to economists, utility represents the satisfaction experienced by consumer of a good (Wikipedia). For our purposes, we will consider utility to be the feel-good factor the blue fellow you'll meet throughout this page has about his job. Let's call him Bob.</p>
+        <h3>A little about Bob</h3>
+        <p>Bob works at the Chocolate Factory with his friends. As you'll see, Bob is extremely emotional. Try changing the utility and see how Bob reacts.</p>
       </div>
       <div class="col-md-6">
         <div id="basic-utility">
         <!--  Draw Happy Chernoff face here -->
         </div>
         <div>
-          <input type="range" id="section1Control" value="100" onchange="changeSmile('basic-utility',this.value)">
+          <span>Less Utility</span><input type="range" id="section1Control" value="100" onchange="changeSmile('basic-utility',this.value)"><span>More Utility</span>
         </div>
       </div>
     </div>
   </section>
 
   <!-- Effort v/s salary -->
-  <section>
+  <section class="container">
     <h2>Utility - Effort - Salary</h2>
     <div class="row">
       <div class="col-md-6">
@@ -46,7 +62,7 @@
   </section>
 
   <!-- Identity -->
-  <section>
+  <section class="container">
     <h2>Utility - Identity</h2>
     <div class="row">
       <div class="col-md-6">
@@ -65,7 +81,7 @@
   </section>
 
   <!-- Deviation from group ideal -->
-  <section>
+  <section class="container">
     <h2>Utility - Deviation from Ideal</h2>
     <div class="row">
       <div class="col-md-6">
@@ -87,7 +103,7 @@
   </section>
 
   <!-- Playground -->
-  <section>
+  <section class="container">
     <h2>Playground</h2>
     <div class="row">
       <div class="col-md-6">
@@ -109,9 +125,9 @@
       </div>
     </div>
   </section>
-  <footer>
-    <h2>Credits</h2>
-
+  <footer class="container">
+    <h2>Reference</h2>
+    <p>Akerlof, G. A., &amp; Kranton, R. E. (n.d.). Identity and the Economics of Organizations. Journal of Economic Perspective, 19, 9-32. Retrieved from http://public.econ.duke.edu/~rek8/identityandtheeconomicsoforganizations.pdf</p>
   </footer>
 
 <script src="https://d3js.org/d3.v3.min.js"></script>
