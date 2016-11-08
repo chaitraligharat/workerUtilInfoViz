@@ -83,7 +83,6 @@ function drawIdentity(graphSVG, angle) {
   {
     line = graphSVG.append("line")
                   .attr("stroke-width",2)
-                  .attr("stroke", "red")
                   .attr("class","identity")
                   .transition()
                   .duration(800);
@@ -108,7 +107,7 @@ function drawIdeal(graphSVG, effort) {
 
   //scale parameters
   effortScale = d3.scale.linear()
-                  .domain([0, 100])
+                  .domain([100, 0])
                   .range([padding, svgHeight - 2*padding]);
 
   y1 = y2 = effortScale(effort);
@@ -118,7 +117,6 @@ function drawIdeal(graphSVG, effort) {
   {
     line = graphSVG.append("line")
                   .attr("stroke-width",2)
-                  .attr("stroke", "green")
                   .attr("class","ideal")
                   .transition()
                   .duration(800);
@@ -132,7 +130,7 @@ function drawIdeal(graphSVG, effort) {
   return graphSVG;
 }
 
-function connectGraph2Chernoff(graphSVG, chernoffSVG) {
+function connectGraph2Output(graphSVG, chernoffSVG, recordSVG) {
     //Get coordinates of the point
     var svgWidth = graphSVG.attr('width');
     var svgHeight = graphSVG.attr('height');
@@ -162,12 +160,12 @@ function connectGraph2Chernoff(graphSVG, chernoffSVG) {
           moveCircle(circle,salary, effort);
         }
 
-        updateChernoff(graphSVG, chernoffSVG);
+        updateOutput(graphSVG, chernoffSVG, recordSVG);
   });
 
 }
 
-function updateChernoff (graphSVG, chernoffSVG) {
+function updateOutput (graphSVG, chernoffSVG, recordSVG) {
   //Calculate Effort
   var effort = readEffortFromGraph(graphSVG);
 
@@ -180,9 +178,68 @@ function updateChernoff (graphSVG, chernoffSVG) {
   //Read ideal
   var ideal = readIdealFromGraph(graphSVG);
 
-    var utility = getUtility(effort, salary, identity, ideal);
+  var utility = getUtility(effort, salary, identity, ideal);
+
+  if(chernoffSVG != null) {
+    console.log("Update chernoff" + utility);
     drawSmile(chernoffSVG, utility);
+  }
+
+  if(recordSVG != null) {
+      record(recordSVG, effort, salary, identity, ideal, utility);
+  }
 }
+
+function record (recordSVG, effort, salary, identity, ideal, utility) {
+
+    //Draw line for effort
+  drawMarkLine(recordSVG, effort, "effort");
+
+  //Draw line for identity
+  drawMarkLine(recordSVG, identity, "identity");
+
+  //Draw line for ideal effort
+  drawMarkLine(recordSVG, ideal, "ideal");
+
+  //Draw line for salary
+  drawMarkLine(recordSVG, salary, "salary");
+
+  //drawMarkLine for utility
+  drawMarkLine(recordSVG, utility,"utility");
+
+}
+
+function drawMarkLine(graphSVG, value, addClass) {
+  var yScale = d3.scale.linear()
+                  .domain([170, -50])
+                  .range([padding, svgHeight - 2*padding]);
+
+  var allMarks = graphSVG.selectAll('circle.'+addClass);
+
+  var x2 = 2*padding;
+  var y2 = yScale(value);
+  if(allMarks.empty() == false )
+  {
+    var lastMark = d3.select(allMarks[0][allMarks.size() - 1]);
+    var x1 = Number(lastMark.attr('cx'));
+    var y1 = Number(lastMark.attr('cy'));
+    x2 = x1 + 10;
+    line = graphSVG.append("line")
+                  .attr("stroke-width",2)
+                  .attr("stroke", "blue")
+                  .attr("class","mark-line "+addClass)
+                  .transition()
+                  .duration(800)
+                  .attr('x1',x1)
+                  .attr('y1',y1)
+                  .attr('x2',x2)
+                  .attr('y2',y2);
+  }
+
+  var mark = drawCircle(graphSVG, 5,5, x2, y2);
+  mark.attr("class","mark "+addClass);
+}
+
 
 function readEffortFromGraph(graphSVG) {
   var svgWidth = graphSVG.attr('width');
@@ -229,7 +286,7 @@ function readIdentityFromGraph(graphSVG) {
   var padding = svgWidth*10/100;
 
   var identityScale = d3.scale.linear()
-                  .range([-100,100])
+                  .range([0,100])
                   .domain([0,Math.PI/2]);
   var line = graphSVG.select("line.identity");
 
@@ -263,46 +320,27 @@ function readIdealFromGraph(graphSVG) {
   return effortScale(effort);
 }
 
-function changeIdentity(graphId, value) {
+function changeIdentity(graphId, value, recordId) {
   var graphSVG = d3.select('#'+graphId+" svg.graph");
   var chernoffSVG = d3.select('#'+graphId+" svg.chernoffFace");
+  var recordSVG = (recordId == null)? null:d3.select('#'+recordId+" svg.graph");
+
   var angleScale = d3.scale.linear()
                   .range([0,Math.PI/2])
                   .domain([100,0]);
   drawIdentity(graphSVG, angleScale(value));
 
-  updateChernoff(graphSVG, chernoffSVG);
+  updateOutput(graphSVG, chernoffSVG, recordSVG);
 }
 
-function changeIdeal(graphId, value) {
+function changeIdeal(graphId, value, recordId) {
   var graphSVG = d3.select('#'+graphId+" svg.graph");
   var chernoffSVG = d3.select('#'+graphId+" svg.chernoffFace");
+  var recordSVG = (recordId == null)? null:d3.select('#'+recordId+" svg.graph");
 
   drawIdeal(graphSVG, value);
 
-  updateChernoff(graphSVG, chernoffSVG);
-}
+  updateOutput(graphSVG, chernoffSVG, recordSVG);
 
-function connectGraph2Record(graphSVG, record) {
-  //Calculate Effort
-  var effort = readEffortFromGraph(graphSVG);
 
-  //Calculate salary
-  var salary = readSalaryFromGraph(graphSVG);
-
-  //Read Identity
-  var identity = readIdentityFromGraph(graphSVG);
-
-  //Read ideal
-  var ideal = readIdealFromGraph(graphSVG);
-
-  var utility = getUtility(effort, salary, identity, ideal);
-
-  var yScale = d3.scale.linear()
-                  .domain([100, 0])
-                  .range([padding, svgHeight - 2*padding]);
-
-  var mark = drawCircle(record, svgWidth/10, yScale(utility), 5, 5);
-  //TODO: Add mark
-    // drawSmile(chernoffSVG, utility);
 }

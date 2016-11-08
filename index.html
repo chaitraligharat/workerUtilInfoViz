@@ -95,10 +95,10 @@
         </div>
 
         <div>
-          <span>Insider</span><input type="range" id="section5Idenity" value="50" onchange="changeIdentity('step5',this.value)"><span>Outsider</span>
+          <span>Insider</span><input type="range" id="section5Idenity" value="50" onchange="changeIdentity('step5',this.value, 'record')"><span>Outsider</span>
         </div>
         <div>
-          <span>Less effort</span><input type="range" id="section5Ideal" value="50" onchange="changeIdeal('step5',this.value)"><span>More Effort</span>
+          <span>Less effort</span><input type="range" id="section5Ideal" value="50" onchange="changeIdeal('step5',this.value, 'record')"><span>More Effort</span>
         </div>
         <!-- TODO: Draw try it -->
       </div>
@@ -129,31 +129,32 @@
   var step2Graph = drawGraph("step2", 200, 200);
   var step2Chernoff = createFace("step2", 200, 200);
   step2Graph = drawIdentity(step2Graph, Math.PI/4);
-  connectGraph2Chernoff(step2Graph, step2Chernoff);
+  connectGraph2Output(step2Graph, step2Chernoff, null);
 
   //Step 3
   var step3Graph = drawGraph("step3", 200, 200);
   var step3Chernoff = createFace("step3", 200, 200);
   step3Graph = drawIdentity(step3Graph, Math.PI/4);
-  connectGraph2Chernoff(step3Graph, step3Chernoff);
+  connectGraph2Output(step3Graph, step3Chernoff, null);
 
   //Step 4
   var step4Graph = drawGraph("step4", 200, 200);
   var step4Chernoff = createFace("step4", 200, 200);
   step4Graph = drawIdentity(step4Graph, Math.PI/4);
   step4Graph = drawIdeal(step4Graph, 50);
-  connectGraph2Chernoff(step4Graph, step3Chernoff);
+  connectGraph2Output(step4Graph, step4Chernoff, null);
 
   //Step 5
   var step5Graph = drawGraph("step5", 200, 200);
   var step5Chernoff = createFace("step5", 200, 200);
   step5Graph = drawIdentity(step5Graph, Math.PI/4);
   step5Graph = drawIdeal(step5Graph, 50);
-  connectGraph2Chernoff(step5Graph, step5Chernoff);
 
   //Record
   var recordGraph = drawGraph("record", 200, 200);
-  connectGraph2Record(step5Graph, recordGraph)
+  connectGraph2Output(step5Graph, step5Chernoff, recordGraph);
+
+
 </script>
 </body>
 </html>

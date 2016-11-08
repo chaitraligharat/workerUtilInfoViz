@@ -7,6 +7,26 @@ circle, .face {
   fill: blue;
 }
 
+.effort {
+  stroke:pink;
+  fill:pink;
+}
+
+.identity {
+  stroke:red;
+  fill:red;
+}
+
+.ideal {
+  stroke:yellow;
+  fill:yellow;
+}
+
+.salary {
+  stroke:green;
+  fill:green;
+}
+
 .eye {
   fill:aqua;
 }
