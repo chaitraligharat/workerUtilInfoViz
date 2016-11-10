@@ -8,123 +8,213 @@
 </head>
 <body>
   <!-- Header -->
+  <section class="jumbotron">
+      <h1>Worker Utility Function</h1>
+      <p>Akerlof and Kranton</p>
+  </section>
   <section class="container">
-    <h1>Worker Utility Function</h1>
-    <p>Akerlof and Kranton</p>
     <h2>Formal Definition</h2>
     <p>The utility function given by Akerlof and Kranton represents the effect effort put in by the worker, his or her income, their identity and their deviation from the group ideal.</p>
     <p>This function if given by
-    <p>U(y, e;c) =ln(y) -  e + Ic - tc|e*(c) - e|</p>
+    <p class="formula">U(y, e;c) =ln(y) -  e + Ic - tc|e*(c) - e|</p>
     <p>where, U is the worker's utility,<p>
       <p> y is her income</p>
       <p> Ic is the identity utility from being in category c</p>
       <p> tc is the disutility resulting from deviating from the ideal effort level for category c or e*(c)</p>
    <p>(Akerlof et al., 2005)</p>
-   <h2>Sounds Complex... But wait!</h2>
+ </section>
+ <section class="container lesson">
+   <h2>Sounds complex... but wait!</h2>
     <p>We will go step by step and try to learn the concept behind the utility equation in simple terms.</p>
   </section>
 
   <!-- Utility -->
   <section class="container">
-    <h2>Step 1: Utility and Bob</h2>
     <div class="row">
       <div class="col-md-6">
+      <h2>Utility and Bob</h2>
         <h3>Utility</h3>
         <p>According to economists, utility represents the satisfaction experienced by consumer of a good (Wikipedia). For our purposes, we will consider utility to be the feel-good factor the blue fellow you'll meet throughout this page has about his job. Let's call him Bob.</p>
         <h3>A little about Bob</h3>
-        <p>Bob works at the Chocolate Factory with his friends. As you'll see, Bob is extremely emotional. Try changing the utility and see how Bob reacts.</p>
+        <p>Bob works at the Chocolate Factory with his friends. As you'll see, Bob is very expressive.</p>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 vis">
         <div id="basic-utility">
+          <p>Try changing the utility using the slider on the right and see how Bob reacts.</p>
         <!--  Draw Happy Chernoff face here -->
         </div>
-        <div>
-          <span>Less Utility</span><input type="range" id="section1Control" value="100" onchange="changeSmile('basic-utility',this.value)"><span>More Utility</span>
+        <div class="row">
+          <div class="col-xs-3">Less Utility</div>
+          <div class="col-xs-6"><input type="range" id="section1Control" value="100" onchange="changeSmile('basic-utility',this.value)"></div>
+          <div class="col-xs-3">More Utility</div>
         </div>
       </div>
     </div>
   </section>
-
+  <section class="container lesson">
+    <div class="row">
+      <p>We now know utility affects Bob a lot.</p>
+    </div>
+  </section>
   <!-- Effort v/s salary -->
   <section class="container">
-    <h2>Utility - Effort - Salary</h2>
     <div class="row">
       <div class="col-md-6">
-
-        <p></p>
+        <h2>Utility - Effort - Salary</h2>
+        <p>According to Akerlof and Kranton, utility is affected by salary and effort.</p>
+        <p>The graph on the right is Effort v/s Salary.</p>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 vis">
         <div id="step2">
+          <p>Click anywhere on the graph to assign some effort and salary to Bob. Let's see how he reacts.</p>
         </div>
+
         <!-- TODO: Draw Graph Effort v/s salary here -->
       </div>
     </div>
   </section>
-
+  <section class="container lesson">
+    <div class="row">
+      <p>Good work! As you might have noticed, a way to increase Bob's utility is to give more salary and make him put less effort.</p>
+      <p>You would have also noticed that Bob is happier when the point on the graph is below the red line.</p>
+    </div>
+  </section>
   <!-- Identity -->
   <section class="container">
-    <h2>Utility - Identity</h2>
+
     <div class="row">
       <div class="col-md-6">
-        <p></p>
+      <h2>Utility - Identity</h2>
+        <p>In real world, it is not always possible to give exceptionally high salaries for huge amounts of effort. (Example, think soldiers who fight for a country)</p>
+        <p>This is where the concept of identity comes into picture according to Akerlof and Kranton.</p>
+        <p>The red line is identity. The more Bob identifies with the Chocolate Factory i.e. more the angle of the red line, more his identity.</p>
+
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 vis">
         <div id="step3">
+          <p>Give Bob some salary and effort by clicking on the graph. Then try changing his identity using the slider.</p>
+          <p>See what Bob feels about the same salary and effort as his identity changes.</p>
         </div>
 
-        <div>
-          <span>Insider</span><input type="range" id="section2Control" value="50" onchange="changeIdentity('step3',this.value)"><span>Outsider</span>
+        <div class="row">
+          <div class="col-xs-3">Insider</div>
+          <div class="col-xs-6"><input type="range" id="section2Control" value="50" onchange="changeIdentity('step3',this.value)"></div>
+          <div class="col-xs-3">Outsider</div>
+        </div>
         </div>
         <!-- TODO: Draw Graph Effort v/s salary with Identity here -->
       </div>
     </div>
   </section>
-
+  <section class="container lesson">
+    <div class="row">
+      <p>You would have noticed that Bob is happier to put in more effort for same salary the more he feels like an insider or identifies with the Chocolate Factory.</p>
+    </div>
+  </section>
   <!-- Deviation from group ideal -->
   <section class="container">
-    <h2>Utility - Deviation from Ideal</h2>
+
     <div class="row">
       <div class="col-md-6">
-        <p></p>
+        <h2>Utility - Deviation from Ideal</h2>
+        <p>Another factor that affects Bob's utility is how different he is from the ideal worker of his group.</p>
+        <p>The effort put in by the ideal worker or the star employee of Chocolate Factory is denoted by the yellow line.</p>
       </div>
-      <div class="col-md-6">
+      <div class="col-md-6 vis">
         <div id="step4">
+          <p>Give Bob some salary and effort, set his identity.</p>
+          <p>Use the effort slider to change the effort put in by the star employee and see how Bob feels.</p>
         </div>
 
-        <div>
-          <span>Insider</span><input type="range" id="section4Idenity" value="50" onchange="changeIdentity('step4',this.value)"><span>Outsider</span>
+        <div class="row">
+          <div class="col-xs-3">Insider</div>
+          <div class="col-xs-6"><input type="range" id="section4Idenity" value="50" onchange="changeIdentity('step4',this.value)"></div>
+          <div class="col-xs-3">Outsider</div>
         </div>
-        <div>
-          <span>Less effort</span><input type="range" id="section4Ideal" value="50" onchange="changeIdeal('step4',this.value)"><span>More Effort</span>
+        <div class="space"></div>
+        <div class="row">
+          <div class="col-xs-3">Less effort</div>
+          <div class="col-xs-6"><input type="range" id="section4Ideal" value="50" onchange="changeIdeal('step4',this.value)"></div>
+          <div class="col-xs-3">More Effort</div>
         </div>
         <!-- TODO: Draw Graph Effort v/s salary with Ideal here -->
       </div>
     </div>
-  </section>
+    </section>
+<div class="container lesson">
+  <div class="row">
+    We see that the more Bob's effort deviates from the star employee at the Chocolate Factory, less is his utility.
+  </div>
+</div>
 
   <!-- Playground -->
   <section class="container">
     <h2>Playground</h2>
-    <div class="row">
-      <div class="col-md-6">
-        <div id="step5">
-        </div>
+    <div class="vis">
+      <p>Try changing the values of identity, effort put in by the star employee, Bob's effort and salary and see what happens. The handy trials chart will help you compare values set for different trials.</p>
+      <div class="row">
+        <div class="col-md-6">
+          <div id="step5">
+          </div>
 
-        <div>
-          <span>Insider</span><input type="range" id="section5Idenity" value="50" onchange="changeIdentity('step5',this.value, 'record')"><span>Outsider</span>
+          <div class="row">
+            <div class="col-xs-3">Insider</div>
+            <div class="col-xs-6"><input type="range" id="section5Idenity" value="50" onchange="changeIdentity('step5',this.value, 'record')"></div>
+            <div class="col-xs-3">Outsider</div>
+          </div>
+          <div class="space"></div>
+          <div class="row">
+            <div class="col-xs-12">Star Employee</div>
+            <div class="col-xs-3">Less effort</div>
+            <div class="col-xs-6"><input type="range" id="section5Ideal" value="50" onchange="changeIdeal('step5',this.value, 'record')"></div>
+            <div class="col-xs-3">More Effort</div>
+          </div>
+          <div class="space"></div>
+          <div class="row instructions">
+            <h3>Legend</h3>
+            <ul class="legend">
+              <li><span class="legend-util">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;Utility : 100 (Max Utility) - 0 (Min Utility)</li>
+              <li><span class="legend-effort">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;Effort : 100 (Max Effort) - 0 (Min Effort)</li>
+              <li><span class="legend-salary">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;Salary : 100 (Max Salary) - 0 (Min Salary)</li>
+              <li><span class="legend-identity">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;Identity : 100 (Complete Insider) - 0 (Complete Outsider)</li>
+              <li><span class="legend-star">&nbsp;&nbsp;&nbsp;</span>&nbsp;&nbsp;Star Employee's effort : 100 (Max Effort) - 0 (Min Effort)</li>
+            </ul>
+          </div>
+          <!-- TODO: Draw try it -->
         </div>
-        <div>
-          <span>Less effort</span><input type="range" id="section5Ideal" value="50" onchange="changeIdeal('step5',this.value, 'record')"><span>More Effort</span>
+        <div class="col-md-6">
+          <div id="record">
+          </div>
+          <div class="row text-right">
+            <button class="btn btn-lg my-btn" type="button" onclick="clearTrials('record')">Clear trials!</button>
+          </div>
+          <!-- TODO: Draw trials -->
         </div>
-        <!-- TODO: Draw try it -->
-      </div>
-      <div class="col-md-6">
-        <div id="record">
-        </div>
-        <!-- TODO: Draw trials -->
       </div>
     </div>
   </section>
+
+  <section class="container lesson">
+    <div class="row">
+      <h2>How to make Bob feel great about his job?</h2>
+      <ul>
+        <li>Increase his salary</li>
+        <li>Give him less work</li>
+        <li>Make him feel more like an insider</li>
+        <li>Show him how close his work is to that of the star employee</li>
+      </ul>
+      </section>
+    </div class="row">
+    <div class="final-lesson">
+      <div class="row">
+        <h2>Remember!</h2>
+        <ul>
+        <li>Akerlof and Kranton's equation tells us effect of effort, salary, identity and deviation from star employee on utility</li>
+        <li>Same utility can be achieved by give or take of effort, salary, identity and deviation from star employee</li>
+        <li>When changing one factor is not possible to keep employees happy - there are always other parameters that can be changed!</li>
+      </ul>
+    </div>
+    </div>
   <footer class="container">
     <h2>Reference</h2>
     <p>Akerlof, G. A., &amp; Kranton, R. E. (n.d.). Identity and the Economics of Organizations. Journal of Economic Perspective, 19, 9-32. Retrieved from http://public.econ.duke.edu/~rek8/identityandtheeconomicsoforganizations.pdf</p>
@@ -167,7 +257,7 @@
   step5Graph = drawIdeal(step5Graph, 50);
 
   //Record
-  var recordGraph = drawGraph("record", 200, 200);
+  var recordGraph = drawTrialsGraph("record", 500, 400);
   connectGraph2Output(step5Graph, step5Chernoff, recordGraph);
 
 

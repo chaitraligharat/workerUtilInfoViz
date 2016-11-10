@@ -1,15 +1,24 @@
 
 body {
-  font: 10px sans-serif;
+  font: 17px sans-serif;
+  line-height: 20px;
 }
 
-circle, .face {
-  fill: blue;
+text {
+  font-size: 10px;
+}
+
+.face {
+  fill: #5EC6C6;
+}
+
+.mark {
+  fill: black;
 }
 
 .effort {
-  stroke:pink;
-  fill:pink;
+  stroke:#3C8B8E;
+  fill:#3C8B8E;
 }
 
 .identity {
@@ -28,9 +37,103 @@ circle, .face {
 }
 
 .eye {
-  fill:aqua;
+  fill:#604C3E;
 }
 
-.graph {
+.lesson {
+  background-color: #E1F1E8;
+  font-size: 20px;
+  color:#604C3E;
+  padding: 2% 10% 5%;
+  margin: 1% 0% 0%;
+  width: 100%;
+  line-height: 30px;
+}
 
+.final-lesson {
+  background-color: #3C8B8E;
+  color:white;
+  padding: 2% 10%;
+  margin: 1% 0%;
+  width: 100%;
+  font-size: 20px;
+  line-height: 30px;
+}
+
+.jumbotron {
+  padding:5%;
+  background-color: #3C8B8E;
+  color:white;
+}
+
+.formula {
+  padding: 2% 10%;
+  font-style: italic;
+  /*margin-left: 10%;*/
+}
+
+.vis {
+  border: solid 1px #5EC6C6;
+  padding: 5%;
+}
+
+.vis p, .instructions {
+  color: grey;
+  font-style: italic;
+}
+
+h2 {
+  margin-top: 3%;
+}
+
+.mouth {
+  fill: #604C3E;
+}
+
+.space {
+  height:30px;
+}
+
+.my-btn {
+  margin:auto;
+  background-color: #3C8B8E;
+  color:white;
+}
+
+.my-btn:hover, .my-btn:active, .my-btn:focus  {
+  background-color: #5EC6C6;
+  color:white;
+}
+
+.legend-util{
+    background:#604C3E;
+    margin: 1%;
+}
+
+.legend-effort{
+    background:#3C8B8E;
+    margin: 1%;
+}
+
+.legend-salary{
+    background:green;
+    margin: 1%;
+}
+
+.legend-star{
+    background:yellow;
+    margin: 1%;
+}
+
+.legend-identity{
+    background:red;
+    margin: 1%;
+}
+
+.legend li{
+    list-style-type: none;
+}
+
+.utility {
+  stroke: #604C3E;
 }

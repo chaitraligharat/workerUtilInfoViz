@@ -1,7 +1,7 @@
 
 function drawGraph(id, svgWidth, svgHeight) {
   var graphDIV = d3.select('#' + id)
-  var padding = svgWidth*10/100;
+  var padding = 20;
 
   var graphSVG=graphDIV.append('svg')        // create an <svg> element
       .attr('width', svgWidth) // set its dimentions
@@ -50,12 +50,77 @@ function drawGraph(id, svgWidth, svgHeight) {
           graphSVG.append("text")
               .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
               .attr("transform", "translate("+ (padding/2) +","+(svgHeight/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
-              .text("Effort");
+              .text("Effort")
+              .attr("class","graph-text");
 
           graphSVG.append("text")
               .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
               .attr("transform", "translate("+ (svgWidth/2) +","+(svgHeight-(padding/3))+")")  // centre below axis
-              .text("Salary");
+              .text("Salary")
+              .attr("class","graph-text");
+
+    return graphSVG;
+}
+
+function drawTrialsGraph(id, svgWidth, svgHeight) {
+  var graphDIV = d3.select('#' + id)
+  var padding = 20;
+
+  var graphSVG=graphDIV.append('svg')        // create an <svg> element
+      .attr('width', svgWidth) // set its dimentions
+      .attr('height', svgHeight)
+      .attr('class','graph');
+
+     // define the y scale  (vertical)
+        var yScale = d3.scale.linear()
+	        .domain([0, 100])    // values between 0 and 100
+		        .range([svgHeight - padding*2, padding]);   // map these to the chart height, less padding.
+                 //REMEMBER: y axis range has the bigger number first because the y value of zero is at the top of chart and increases as you go down.
+
+
+        var xScale = d3.scale.linear()
+	        .domain([0, 10])    // values between for month of january
+		        .range([padding, svgWidth - padding * 2]);   // map these the the chart width = total width minus padding at both sides
+
+
+     //Create the Axis
+     var xAxis = d3.svg.axis()
+                        .scale(xScale);
+
+
+    // define the y axis
+        var yAxis = d3.svg.axis()
+            .orient("left")
+            .scale(yScale);
+
+        // define the y axis
+        var xAxis = d3.svg.axis()
+            .orient("bottom")
+            .scale(xScale);
+
+        // draw y axis with labels and move in from the size by the amount of padding
+        graphSVG.append("g")
+            .attr("transform", "translate("+padding*2+",0)")
+            .call(yAxis);
+
+        // draw x axis with labels and move to the bottom of the chart area
+        graphSVG.append("g")
+            .attr("class", "xaxis")   // give it a class so it can be used to select only xaxis labels  below
+            .attr("transform", "translate("+padding+"," + (svgHeight - padding*2) + ")")
+            .call(xAxis);
+
+        // now add titles to the axes
+          graphSVG.append("text")
+              .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+              .attr("transform", "translate("+ (padding/2) +","+(svgHeight/2)+")rotate(-90)")  // text is drawn off the screen top left, move down and out and rotate
+              .text("Values")
+              .attr("class","graph-text");
+
+          graphSVG.append("text")
+              .attr("text-anchor", "middle")  // this makes it easy to centre the text as the transform is applied to the anchor
+              .attr("transform", "translate("+ (svgWidth/2) +","+(svgHeight-(padding/3))+")")  // centre below axis
+              .text("Trials")
+              .attr("class","graph-text");
 
     return graphSVG;
 }
@@ -63,7 +128,7 @@ function drawGraph(id, svgWidth, svgHeight) {
 function drawIdentity(graphSVG, angle) {
   svgWidth = graphSVG.attr("width");
   svgHeight = graphSVG.attr("height");
-  padding = svgWidth*0.1;
+  padding = 20;
 
   x1 = 2*padding;
   y1 = svgHeight - padding*2;
@@ -99,7 +164,7 @@ function drawIdentity(graphSVG, angle) {
 function drawIdeal(graphSVG, effort) {
   svgWidth = graphSVG.attr("width");
   svgHeight = graphSVG.attr("height");
-  padding = svgWidth*0.1;
+  padding = 20;
 
   x1 = 2*padding;
 
@@ -134,7 +199,7 @@ function connectGraph2Output(graphSVG, chernoffSVG, recordSVG) {
     //Get coordinates of the point
     var svgWidth = graphSVG.attr('width');
     var svgHeight = graphSVG.attr('height');
-    var padding = svgWidth*10/100;
+    var padding = 20;
 
     var coordinates = [svgWidth - padding, svgHeight - padding*2];
 
@@ -186,7 +251,10 @@ function updateOutput (graphSVG, chernoffSVG, recordSVG) {
   }
 
   if(recordSVG != null) {
-      record(recordSVG, effort, salary, identity, ideal, utility);
+      //Scale utility to 100 for graph
+      var utilScale = d3.scale.linear().domain([-50,170]).range([0,100]);
+
+      record(recordSVG, effort, salary, identity, ideal, utilScale(utility));
   }
 }
 
@@ -210,12 +278,20 @@ function record (recordSVG, effort, salary, identity, ideal, utility) {
 }
 
 function drawMarkLine(graphSVG, value, addClass) {
+  //Get coordinates of the point
+  var svgWidth = graphSVG.attr('width');
+  var svgHeight = graphSVG.attr('height');
+  var padding = 20;
+
   var yScale = d3.scale.linear()
-                  .domain([170, -50])
+                  .domain([100, 0])
                   .range([padding, svgHeight - 2*padding]);
 
   var allMarks = graphSVG.selectAll('circle.'+addClass);
 
+  if(allMarks.size() >= 11) {
+    return;
+  }
   var x2 = 2*padding;
   var y2 = yScale(value);
   if(allMarks.empty() == false )
@@ -223,7 +299,7 @@ function drawMarkLine(graphSVG, value, addClass) {
     var lastMark = d3.select(allMarks[0][allMarks.size() - 1]);
     var x1 = Number(lastMark.attr('cx'));
     var y1 = Number(lastMark.attr('cy'));
-    x2 = x1 + 10;
+    x2 = x1 + (svgWidth - 3*padding)/10;
     line = graphSVG.append("line")
                   .attr("stroke-width",2)
                   .attr("stroke", "blue")
@@ -241,10 +317,17 @@ function drawMarkLine(graphSVG, value, addClass) {
 }
 
 
+function clearTrials(recordSVGId) {
+  var recordSVG = d3.select('#'+recordSVGId+" svg.graph");
+  // console.log(recordSVG.selectAll("svg.graph"));
+  recordSVG.selectAll('circle.mark').remove();
+  recordSVG.selectAll('line').remove();
+}
+
 function readEffortFromGraph(graphSVG) {
   var svgWidth = graphSVG.attr('width');
   var svgHeight = graphSVG.attr('height');
-  var padding = svgWidth*10/100;
+  var padding = 20;
 
   //Return default if no element is present
   if(graphSVG.select("circle.mark").empty())
@@ -283,7 +366,7 @@ function readSalaryFromGraph(graphSVG) {
 function readIdentityFromGraph(graphSVG) {
   var svgWidth = graphSVG.attr('width');
   var svgHeight = graphSVG.attr('height');
-  var padding = svgWidth*10/100;
+  var padding = 20;
 
   var identityScale = d3.scale.linear()
                   .range([0,100])
@@ -314,7 +397,7 @@ function readIdealFromGraph(graphSVG) {
 
   //Return default if no element is present
   if(line.empty()) {
-    return readEffortFromGraph(graphSVG);
+    return 0;
   }
   var effort = line.attr("y2");
   return effortScale(effort);
